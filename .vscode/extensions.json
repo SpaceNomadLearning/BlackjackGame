@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "vscode-icons-team.vscode-icons",
+        "ms-dotnettools.csharp",
+        "josefpihrt-vscode.roslynator",
+        "mhutchie.git-graph",
+        "github.vscode-pull-request-github",
+        "bierner.github-markdown-preview",
+        "stkb.rewrap",
+        "tomoki1207.pdf",
+        "streetsidesoftware.code-spell-checker",
+        "mdickin.markdown-shortcuts",
+        "darkriszty.markdown-table-prettify",
+        "yzhang.markdown-all-in-one"
+    ]
+}
