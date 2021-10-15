@@ -1,4 +1,4 @@
-# MyApp
+# Blackjack game
 
 ## Running the solution
 
