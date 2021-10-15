@@ -71,14 +71,6 @@ namespace MyApp
             }
         }
 
-        private static bool InstantWinConditionsAreMet(IEnumerable<Player> players)
-        {
-            // Instant-Win conditions:
-            //     - "blackjack" hand - A player's first two cards are an ACE and a car with a 10 value.
-            //     - A player reaches exactely 21
-            return players.Any(p => p.CardsValue == 21);
-        }
-
         public void WriteResultTo(TextWriter writer)
         {
             var allPlayers = new List<Player> { _dealer };
@@ -121,6 +113,14 @@ namespace MyApp
 
                 writer.WriteLine($"End-game-Win: {endGameWinner.Name}");
             }
+        }
+
+        private static bool InstantWinConditionsAreMet(IEnumerable<Player> players)
+        {
+            // Instant-Win conditions:
+            //     - "blackjack" hand - A player's first two cards are an ACE and a car with a 10 value.
+            //     - A player reaches exactely 21
+            return players.Any(p => p.CardsValue == 21);
         }
 
         internal sealed class Dealer : Player
