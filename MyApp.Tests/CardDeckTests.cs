@@ -64,5 +64,19 @@ namespace MyApp.Tests
             // Assert
             Assert.Equal(expectedErrorMessage, exception.Message);
         }
+
+        [Theory]
+        [InlineData(-1, 1)]
+        [InlineData(-1, -1)]
+        [InlineData(1, -1)]
+        [InlineData(1, 53)]
+        public void CardDeck_SwapCards_Should_Throw_Exception_For_OutOfRange_Indexes(int firstCardIndex, int secondCardIndex)
+        {
+            // Arrange
+            var cardDeck = new CardDeck();
+
+            // Act & Assert
+            Assert.Throws<IndexOutOfRangeException>(() => cardDeck.SwapCards(firstCardIndex, secondCardIndex));
+        }
     }
 }
