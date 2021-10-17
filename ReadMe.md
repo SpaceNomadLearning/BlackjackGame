@@ -1,5 +1,17 @@
 # Blackjack game
 
+Check [docs](./docs/Simplified-Blackjack.md) for info about app requirements.
+
+## Testing the solution
+
+* On the `root folder` run next commands:
+
+```cmd
+dotnet test
+```
+
+![App-Tests execution](./docs/app-run-tests.png)
+
 ## Running the solution
 
 * On the `root folder` run next commands:
