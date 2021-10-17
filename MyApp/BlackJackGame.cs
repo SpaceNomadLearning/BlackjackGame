@@ -83,7 +83,7 @@ namespace MyApp
             writer.WriteLine();
             foreach (var player in allPlayers)
             {
-                writer.Write($"{player.Name}".PadRight(10));
+                writer.Write(player.Name.PadRight(10));
                 writer.Write($"| {player.RiskAversion}".PadRight(11));
                 writer.Write($"| {player.CardsValue}".PadRight(10));
 

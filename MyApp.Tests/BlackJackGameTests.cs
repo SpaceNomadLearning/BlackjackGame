@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace MyApp.Tests
@@ -81,6 +82,26 @@ namespace MyApp.Tests
             foreach (var player in players)
             {
                 Assert.True(player.Cards.Length >= defaultNrOfCardsThatEachPlayerShouldReceive);
+            }
+        }
+
+        [Theory]
+        [MemberData(nameof(GetPlayersSetsData))]
+        public void BlackJackGame_Should_Print_Result(Player[] players)
+        {
+            // Arrange
+            var game = new BlackJackGame(players);
+            using var writer = new StringWriter();
+
+            // Act
+            game.Start();
+            game.WriteResultTo(writer);
+
+            // Assert
+            var output = writer.ToString();
+            foreach (var player in players)
+            {
+                Assert.Contains(player.Name, output);
             }
         }
 
