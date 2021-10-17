@@ -10,14 +10,15 @@ namespace MyApp.Tests
         public void BlackJackGame_Should_Ensure_At_Least_1_Player()
         {
             // Arrange
-            var players = Array.Empty<Player>();
             const string expectedErrorMessage = "A game of blackjack should have at least one player.";
 
             // Act
-            var exception = Assert.Throws<ApplicationException>(() => new BlackJackGame(players));
+            var exception1 =Assert.Throws<ApplicationException>(() => new BlackJackGame(players: null));
+            var exception2 = Assert.Throws<ApplicationException>(() => new BlackJackGame(Array.Empty<Player>()));
 
             // Asset
-            Assert.Equal(expectedErrorMessage, exception.Message);
+            Assert.Equal(expectedErrorMessage, exception1.Message);
+            Assert.Equal(expectedErrorMessage, exception2.Message);
         }
 
         [Fact]
