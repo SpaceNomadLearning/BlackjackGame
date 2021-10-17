@@ -29,8 +29,8 @@ namespace MyApp
             {
                 // Each player:
                 //     - has a certain risk aversion (0...4); a player will stop drawing cards if he/she reaches
-                //       the 21-riskAversion value for his/her hand.
-                var is21RiskAversion = CardsValue > (21 - RiskAversion);
+                //       the 21-riskAversion value for his/her hand. Eg: risk aversion of 4 (will always stop at 17)
+                var is21RiskAversion = CardsValue >= (21 - RiskAversion);
                 return !is21RiskAversion;
             }
         }
