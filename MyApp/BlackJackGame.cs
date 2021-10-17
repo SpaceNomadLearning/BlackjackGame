@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MyApp
 {
-    internal sealed class BlackJackGame
+    public sealed class BlackJackGame
     {
         private readonly Dealer _dealer;
         public BlackJackGame(Player[] players)
