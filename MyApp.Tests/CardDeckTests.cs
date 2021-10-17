@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Xunit;
 
@@ -45,6 +46,23 @@ namespace MyApp.Tests
                 var nrOfSuits = cardDeck.Cards.Count(c => c.Name == card.Name && c.Value == card.Value);
                 Assert.Equal(4, nrOfSuits);
             }
+        }
+
+        [Fact]
+        public void CardDeck_Should_Throw_Exception_For_Empty_Deck()
+        {
+            // Arrange
+            const string expectedErrorMessage = "The deck is empty.";
+            const int defaultNrOfCardsInDeck = 52;
+            var cardDeck = new CardDeck();
+            for (int i = 0; i < defaultNrOfCardsInDeck; i++)
+                cardDeck.TakeCard();
+
+            // Act
+            var exception = Assert.Throws<ApplicationException>(() => cardDeck.TakeCard());
+
+            // Assert
+            Assert.Equal(expectedErrorMessage, exception.Message);
         }
     }
 }
