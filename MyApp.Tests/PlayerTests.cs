@@ -18,6 +18,22 @@ namespace MyApp.Tests
             Assert.Equal(expectedErrorMessage, exception.Message);
         }
 
+        [Fact]
+        public void Player_Should_Throw_Exception_When_Receiving_ToManyCards()
+        {
+            // Arrange
+            const string expectedErrorMessage = "The player 'Smith' does not need another card.";
+            var player = new Player("Smith", riskAversion: 4);
+            player.ReceiveCard(new Card("K", 10));
+            player.ReceiveCard(new Card("7", 7));
+
+            // Act
+            var exception = Assert.Throws<ApplicationException>(() => player.ReceiveCard(new Card("1", 1)));
+
+            // Assert
+            Assert.Equal(expectedErrorMessage, exception.Message);
+        }
+
         [Theory]
         [MemberData(nameof(GetPlayersWhichShouldStopTakingCardsData))]
         public void Player_Should_Stop_Taking_Cards_At_Risk_Aversion_Trashold(int riskAversion, Card[] hand)
