@@ -12,7 +12,7 @@ namespace MyApp
         public Player(string name, int riskAversion)
         {
             if (riskAversion < 0 || riskAversion > 4)
-                throw new IndexOutOfRangeException("Player risk aversion should have a value between 0 and 4.");
+                throw new ApplicationException("Player risk aversion should have a value between 0 and 4.");
 
             Name = name;
             RiskAversion = riskAversion;
