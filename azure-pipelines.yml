@@ -1,0 +1,35 @@
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+variables:
+  sln: './BlackjackGame.sln'
+
+parameters:
+- name:     operatingSystems
+  type:     object
+  default:
+  - name:     Ubuntu
+    vmImage:  ubuntu-latest
+  - name:     Windows
+    vmImage:  windows-latest
+  - name:     macOS
+    vmImage:  macOS-latest
+- name:     configurations
+  type:     object
+  default:
+  - Debug
+  - Release
+
+jobs:
+- ${{ each conf in parameters.configurations }}:
+  - ${{ each os in parameters.operatingSystems }}:
+    - job: job${{ os.name }}${{ conf }}
+      displayName: ${{ conf }} (${{ os.name }})
+      pool:
+        vmImage:  ${{ os.vmImage }}
+      steps:
+      - task: DotNetCoreCLI@2
+        displayName: Build solution (${{ os.name }} ${{ conf }})
+        inputs:
+          command: build
+          projects: $(sln)
+          arguments: --configuration ${{ conf }}
