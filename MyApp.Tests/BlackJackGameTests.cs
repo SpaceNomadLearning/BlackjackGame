@@ -14,7 +14,7 @@ namespace MyApp.Tests
             const string expectedErrorMessage = "A game of blackjack should have at least one player.";
 
             // Act
-            var exception1 =Assert.Throws<ApplicationException>(() => new BlackJackGame(players: null));
+            var exception1 = Assert.Throws<ApplicationException>(() => new BlackJackGame(players: null));
             var exception2 = Assert.Throws<ApplicationException>(() => new BlackJackGame(Array.Empty<Player>()));
 
             // Asset
