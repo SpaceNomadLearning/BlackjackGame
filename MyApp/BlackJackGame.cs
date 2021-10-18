@@ -59,9 +59,6 @@ namespace MyApp
                 {
                     if (player.TakeNextCard)
                         _dealer.DealCard(player);
-
-                    // NOTE: Should we remove the players who don't want to take a card from the next rounds?
-                    // playersWhoShouldReceiveCard.Remove(player);
                 }
 
                 if (InstantWinConditionsAreMet(playersWhoShouldReceiveCard))
@@ -94,8 +91,9 @@ namespace MyApp
                 writer.WriteLine();
             }
 
-            // End-game winner (non-instant-win)
-            //     - The players/dealer that haven’t lost and are the closest to 21
+            // Instant-Win conditions:
+            //     - "blackjack" hand - A player's first two cards are an ACE and a car with a 10 value.
+            //     - A player reaches exactely 21
             var instantWiners = allPlayers.Where(p => p.CardsValue == 21);
             if (instantWiners.Any())
             {
@@ -104,10 +102,15 @@ namespace MyApp
             }
             else
             {
+                // End-game winner (non-instant-win)
+                //     - The players/dealer that haven’t lost and are the closest to 21
                 var endGameWinner = Players.Where(p => p.CardsValue < 21)
                                         .OrderByDescending(p => p.CardsValue)
                                         .FirstOrDefault();
 
+                // The dealer:
+                //     - Doesn’t lose if he/she goes over 21: in the end-game winner scenario, a
+                //       dealer with a hand of 22 will win against a player with a hand of 18.
                 if (_dealer.CardsValue > (endGameWinner?.CardsValue ?? 0))
                     endGameWinner = _dealer;
 
