@@ -39,5 +39,14 @@ jobs:
                 inputs:
                   command: test
                   projects: $(tests)
-                  arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec --no-build --nologo
+                  arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec --no-build --nologo /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
                   publishTestResults: true
+              - script: "dotnet tool install --global dotnet-reportgenerator-globaltool"
+                displayName: "Install ReportGenerator tool"
+              - script: 'reportgenerator -reports:**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/coverage-report -reporttypes:"Cobertura"'
+                displayName: "Create coverage reports"
+              - task: PublishCodeCoverageResults@1
+                displayName: "Publish code coverage report"
+                inputs:
+                  codeCoverageTool: Cobertura
+                  summaryFileLocation: "$(Build.SourcesDirectory)/coverage-report/Cobertura.xml"
