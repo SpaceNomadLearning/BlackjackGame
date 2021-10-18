@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Workspace-specific files
+coverage-report/
+
 # User-specific files
 *.rsuser
 *.suo
