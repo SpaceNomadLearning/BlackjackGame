@@ -2,6 +2,8 @@
 
 Check [docs](./docs/Simplified-Blackjack.md) for info about app requirements.
 
+- [![Build Status](https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_apis/build/status/SpaceNomadLearning.BlackjackGame?branchName=main)](https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/latest?definitionId=4&branchName=main)
+
 ## Testing the solution
 
 * On the `root folder` run next commands:
