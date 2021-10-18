@@ -95,7 +95,7 @@ dotnet test
 * On the `root folder` execute script:
 
 ```cmd
-code-coverage.cmd
+code-coverage.{cmd|sh}
 ```
 
 ![App-Code-Coverage execution](./docs/app-run-code-coverage.gif)
