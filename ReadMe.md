@@ -8,6 +8,7 @@ Check [docs](./docs/Simplified-Blackjack.md) for info about app requirements.
 - [Blackjack game](#blackjack-game)
   - [Running the solution](#running-the-solution)
   - [Testing the solution](#testing-the-solution)
+  - [Code Coverage](#code-coverage)
 
 ## Running the solution
 
@@ -88,3 +89,21 @@ dotnet test
 ```
 
 ![App-Tests execution](./docs/app-run-tests.png)
+
+## Code Coverage
+
+* On the `root folder` execute script:
+
+```cmd
+code-coverage.cmd
+```
+
+![App-Code-Coverage execution](./docs/app-run-code-coverage.gif)
+
+* Open **coverage-report/index.html** file in you're preferred browser --or--
+  [Check CI coverage reports on Azure][CI-coverage]
+
+![App-Code-Coverage HTML](./docs/app-code-coverage-report.png)
+
+<!-- Links: -->
+[CI-coverage]: https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/results?buildId=273&view=codecoverage-tab
