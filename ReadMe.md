@@ -2,17 +2,12 @@
 
 Check [docs](./docs/Simplified-Blackjack.md) for info about app requirements.
 
-- [![Build Status](https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_apis/build/status/SpaceNomadLearning.BlackjackGame?branchName=main)](https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/latest?definitionId=4&branchName=main)
+[![Build Status](https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_apis/build/status/SpaceNomadLearning.BlackjackGame?branchName=main)](https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/latest?definitionId=4&branchName=main)
 
-## Testing the solution
-
-* On the `root folder` run next commands:
-
-```cmd
-dotnet test
-```
-
-![App-Tests execution](./docs/app-run-tests.png)
+**Table of Contents:**
+- [Blackjack game](#blackjack-game)
+  - [Running the solution](#running-the-solution)
+  - [Testing the solution](#testing-the-solution)
 
 ## Running the solution
 
@@ -83,3 +78,13 @@ Player-3  | 1        | 24      | 5   2   7   K
 Player-4  | 1        | 24      | 5   A   8
 End-game-Win: Dealer
 ```
+
+## Testing the solution
+
+* On the `root folder` run next commands:
+
+```cmd
+dotnet test
+```
+
+![App-Tests execution](./docs/app-run-tests.png)
