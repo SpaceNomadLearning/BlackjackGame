@@ -2,6 +2,7 @@
 
 variables:
   sln: './BlackjackGame.sln'
+  tests: './MyApp.Tests/MyApp.Tests.csproj'
 
 parameters:
 - name:     operatingSystems
@@ -33,3 +34,10 @@ jobs:
           command: build
           projects: $(sln)
           arguments: --configuration ${{ conf }}
+      - task: DotNetCoreCLI@2
+        displayName: Run tests (${{ os.name }} ${{ conf }})
+        inputs:
+          command: test
+          projects: $(tests)
+          arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec
+          publishTestResults: true
