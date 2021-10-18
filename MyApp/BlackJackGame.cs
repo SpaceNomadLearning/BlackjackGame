@@ -100,13 +100,13 @@ namespace MyApp
             else
             {
                 // End-game winner (non-instant-win)
-                //     - The players/dealer that haven’t lost and are the closest to 21
+                //     - The players/dealer that haven't lost and are the closest to 21
                 var endGameWinner = Players.Where(p => p.CardsValue < 21)
                                         .OrderByDescending(p => p.CardsValue)
                                         .FirstOrDefault();
 
                 // The dealer:
-                //     - Doesn’t lose if he/she goes over 21: in the end-game winner scenario, a
+                //     - Doesn't lose if he/she goes over 21: in the end-game winner scenario, a
                 //       dealer with a hand of 22 will win against a player with a hand of 18.
                 if (_dealer.CardsValue > (endGameWinner?.CardsValue ?? 0))
                     endGameWinner = _dealer;

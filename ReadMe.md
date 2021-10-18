@@ -28,7 +28,7 @@ dotnet --version
 dotnet run --project MyApp
 ```
 
-With each project run, the output displays each player’s and the dealer’s final
+With each project run, the output displays each player's and the dealer's final
 hand into a file and specifies who won.
 
 ![App Runs](./docs/app-run-examples.png)

@@ -39,7 +39,7 @@ Simulate a simplified game of blackjack using the C# programming language.
 
 ### Instant-Win conditions
 
-- “blackjack” hand - A player’s first two cards are an ACE and a card with a 10
+- “blackjack” hand - A player's first two cards are an ACE and a card with a 10
   value.
 - A player reaches exactly 21
 
@@ -50,18 +50,18 @@ Simulate a simplified game of blackjack using the C# programming language.
 
 #### End-game winner (non-instant-win) 
 
-- The players/dealer that haven’t lost and are the closest to 21
+- The players/dealer that haven't lost and are the closest to 21
 
 ### The dealer
 
 - Acts exactly like any other player with the following exceptions
     - Has a fixed risk aversion of 4 (will always stop at 17)
-    - Doesn’t lose if he/she goes over 21: in the end-game winner scenario, a
+    - Doesn't lose if he/she goes over 21: in the end-game winner scenario, a
       dealer with a hand of 22 will win against a player with a hand of 18.
 
 ### Program requirements
 
 - The program is a simulation: it takes no user input and outputs the result
   into a file
-- Write each player’sand the dealer’s final hand into a file and specifies who
+- Write each player'sand the dealer's final hand into a file and specifies who
   won
