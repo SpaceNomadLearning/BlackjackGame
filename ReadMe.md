@@ -6,13 +6,23 @@ Check [docs](./docs/Simplified-Blackjack.md) for info about app requirements.
 
 **Table of Contents:**
 - [Blackjack game](#blackjack-game)
-  - [Running the solution](#running-the-solution)
-  - [Testing the solution](#testing-the-solution)
+  - [Prerequisites](#prerequisites)
+  - [Run solution](#run-solution)
+  - [Test solution](#test-solution)
   - [Code Coverage](#code-coverage)
 
-## Running the solution
+## Prerequisites
 
-* On the `root folder` run next commands:
+* Install [NET Core 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+* To ensure the *dotnet* is setup, run next command:
+
+```cmd
+dotnet --version
+```
+
+## Run solution
+
+* On the `root folder` run next command:
 
 ```cmd
 dotnet run --project MyApp
@@ -80,9 +90,9 @@ Player-4  | 1        | 24      | 5   A   8
 End-game-Win: Dealer
 ```
 
-## Testing the solution
+## Test solution
 
-* On the `root folder` run next commands:
+* On the `root folder` run next command:
 
 ```cmd
 dotnet test
