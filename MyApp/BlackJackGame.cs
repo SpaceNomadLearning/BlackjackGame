@@ -56,10 +56,7 @@ namespace MyApp
                     return;
 
                 foreach (var player in playersWhoShouldReceiveCard)
-                {
-                    if (player.TakeNextCard)
-                        _dealer.DealCard(player);
-                }
+                    _dealer.DealCard(player);
 
                 if (InstantWinConditionsAreMet(playersWhoShouldReceiveCard))
                 {
