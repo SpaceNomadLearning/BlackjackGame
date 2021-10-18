@@ -33,11 +33,11 @@ jobs:
                 inputs:
                   command: build
                   projects: $(sln)
-                  arguments: --configuration ${{ conf }}
+                  arguments: --configuration ${{ conf }} --nologo
               - task: DotNetCoreCLI@2
                 displayName: Run tests (${{ os.name }} ${{ conf }})
                 inputs:
                   command: test
                   projects: $(tests)
-                  arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec
+                  arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec --no-build --nologo
                   publishTestResults: true
