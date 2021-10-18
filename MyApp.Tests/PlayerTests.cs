@@ -19,7 +19,7 @@ namespace MyApp.Tests
         }
 
         [Fact]
-        public void Player_Should_Throw_Exception_When_Receiving_ToManyCards()
+        public void Player_Should_Throw_Exception_When_Receiving_TooManyCards()
         {
             // Arrange
             const string expectedErrorMessage = "The player 'Smith' does not need another card.";
@@ -36,7 +36,7 @@ namespace MyApp.Tests
 
         [Theory]
         [MemberData(nameof(GetPlayersWhichShouldStopTakingCardsData))]
-        public void Player_Should_Stop_Taking_Cards_At_Risk_Aversion_Trashold(int riskAversion, Card[] hand)
+        public void Player_Should_Stop_Taking_Cards_At_Risk_Aversion_Threshold(int riskAversion, Card[] hand)
         {
             var player = new Player(name: string.Empty, riskAversion);
             foreach (var card in hand)
