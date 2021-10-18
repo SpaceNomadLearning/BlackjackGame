@@ -1,43 +1,43 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 variables:
-  sln: './BlackjackGame.sln'
-  tests: './MyApp.Tests/MyApp.Tests.csproj'
+  sln: "./BlackjackGame.sln"
+  tests: "./MyApp.Tests/MyApp.Tests.csproj"
 
 parameters:
-- name:     operatingSystems
-  type:     object
-  default:
-  - name:     Ubuntu
-    vmImage:  ubuntu-latest
-  - name:     Windows
-    vmImage:  windows-latest
-  - name:     macOS
-    vmImage:  macOS-latest
-- name:     configurations
-  type:     object
-  default:
-  - Debug
-  - Release
+  - name: operatingSystems
+    type: object
+    default:
+      - name: Ubuntu
+        vmImage: ubuntu-latest
+      - name: Windows
+        vmImage: windows-latest
+      - name: macOS
+        vmImage: macOS-latest
+  - name: configurations
+    type: object
+    default:
+      - Debug
+      - Release
 
 jobs:
-- ${{ each conf in parameters.configurations }}:
-  - ${{ each os in parameters.operatingSystems }}:
-    - job: job${{ os.name }}${{ conf }}
-      displayName: ${{ conf }} (${{ os.name }})
-      pool:
-        vmImage:  ${{ os.vmImage }}
-      steps:
-      - task: DotNetCoreCLI@2
-        displayName: Build solution (${{ os.name }} ${{ conf }})
-        inputs:
-          command: build
-          projects: $(sln)
-          arguments: --configuration ${{ conf }}
-      - task: DotNetCoreCLI@2
-        displayName: Run tests (${{ os.name }} ${{ conf }})
-        inputs:
-          command: test
-          projects: $(tests)
-          arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec
-          publishTestResults: true
+  - ${{ each conf in parameters.configurations }}:
+      - ${{ each os in parameters.operatingSystems }}:
+          - job: job${{ os.name }}${{ conf }}
+            displayName: ${{ conf }} (${{ os.name }})
+            pool:
+              vmImage: ${{ os.vmImage }}
+            steps:
+              - task: DotNetCoreCLI@2
+                displayName: Build solution (${{ os.name }} ${{ conf }})
+                inputs:
+                  command: build
+                  projects: $(sln)
+                  arguments: --configuration ${{ conf }}
+              - task: DotNetCoreCLI@2
+                displayName: Run tests (${{ os.name }} ${{ conf }})
+                inputs:
+                  command: test
+                  projects: $(tests)
+                  arguments: --configuration ${{ conf }} --blame-hang-timeout 60sec
+                  publishTestResults: true
