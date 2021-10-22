@@ -13,8 +13,8 @@ Check [docs](./docs/Simplified-Blackjack.md) for info about app requirements.
 
 ## Prerequisites
 
-* Install [NET Core 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
-* To ensure the *dotnet* is setup, run next command:
+1. Install [NET Core 5.0 SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
+1. Ensure *dotnet* is installed by running next command:
 
 ```cmd
 dotnet --version
@@ -22,6 +22,7 @@ dotnet --version
 
 ## Run solution
 
+* [Check builds on CI][CI-builds] **--or--**
 * On the `root folder` run next command:
 
 ```cmd
@@ -92,6 +93,7 @@ End-game-Win: Dealer
 
 ## Test solution
 
+* [Check tests on CI][CI-tests] **--or--**
 * On the `root folder` run next command:
 
 ```cmd
@@ -102,7 +104,9 @@ dotnet test
 
 ## Code Coverage
 
-* On the `root folder` execute script:
+* [Check Code Coverage on CI][CI-coverage] **--or--**
+
+1. On the `root folder` execute script:
 
 ```cmd
 code-coverage.{cmd|sh}
@@ -110,10 +114,11 @@ code-coverage.{cmd|sh}
 
 ![App-Code-Coverage execution](./docs/app-run-code-coverage.gif)
 
-* Open **coverage-report/index.html** file in you're preferred browser --or--
-  [Check CI coverage reports on Azure][CI-coverage]
+1. Open **coverage-report/index.html** file in you're preferred browser
 
 ![App-Code-Coverage HTML](./docs/app-code-coverage-report.png)
 
 <!-- Links: -->
-[CI-coverage]: https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/results?buildId=273&view=codecoverage-tab
+[CI-builds]: https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/latest?definitionId=4&branchName=main
+[CI-tests]: https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/latest?definitionId=4&branchName=main
+[CI-coverage]: https://dev.azure.com/SpaceNomadLearning/BlackJackGame/_build/latest?definitionId=4&branchName=main
