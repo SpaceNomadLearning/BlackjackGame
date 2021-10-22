@@ -50,13 +50,16 @@ namespace MyApp
 
         public void SwapCards(int firstCardIndex, int secondCardIndex)
         {
-            if (firstCardIndex < 0 || secondCardIndex < 0 ||
-                firstCardIndex > _cards.Count || secondCardIndex > _cards.Count)
+            const int minIndex = 0;
+            var maxIndex = _cards.Count;
+
+            if (firstCardIndex < minIndex || firstCardIndex > maxIndex ||
+                secondCardIndex < minIndex || secondCardIndex > maxIndex)
             {
                 throw new IndexOutOfRangeException();
             }
 
-            if (_cards.Count == 0 || firstCardIndex == secondCardIndex)
+            if (firstCardIndex == secondCardIndex)
                 return;
 
             var item = _cards[firstCardIndex];
