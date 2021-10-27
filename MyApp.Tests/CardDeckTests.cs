@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace MyApp.Tests
@@ -65,6 +66,45 @@ namespace MyApp.Tests
             Assert.Equal(expectedErrorMessage, exception.Message);
         }
 
+        [Fact]
+        public async Task CardDeck_TakeCard_Ensure_ThreadSafe()
+        {
+            const int maxNrOfRuns = 100;
+            for (int runs = 0; runs < maxNrOfRuns; runs++)
+            {
+                // Arrange
+                const int maxNrOfTasks = 100;
+                var tasks = new Task[maxNrOfTasks];
+                var cardDeck = new CardDeck();
+
+                try
+                {
+                    // Act
+                    for (int i = 0; i < tasks.Length; i++)
+                    {
+                        tasks[i] = Task.Run(() =>
+                        {
+                            try
+                            {
+                                cardDeck.TakeCard();
+                            }
+                            catch (ApplicationException)
+                            {
+                                // We want to ignore ApplicationException(s) since we are interested
+                                // to see which other exceptions may occur, like `ArgumentOutOfRangeException`, etc...
+                            }
+                        });
+                    }
+                    await Task.WhenAll(tasks).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    // Assert
+                    Assert.Null(e);
+                }
+            }
+        }
+
         [Theory]
         [InlineData(-1, 1)]
         [InlineData(-1, -1)]
@@ -77,6 +117,69 @@ namespace MyApp.Tests
 
             // Act & Assert
             Assert.Throws<IndexOutOfRangeException>(() => cardDeck.SwapCards(firstCardIndex, secondCardIndex));
+        }
+
+        [Fact]
+        public async Task CardDeck_SwapCards_Ensure_ThreadSafe()
+        {
+            // Arrange
+            const int expectedNrOfSuits = 4;
+            var defaultSuitOfCards = new[]
+            {
+                new Card("A", 11),
+
+                new Card("J", 10),
+                new Card("K", 10),
+                new Card("Q", 10),
+                new Card("10", 10),
+
+                new Card("2", 2),
+                new Card("3", 3),
+                new Card("4", 4),
+                new Card("5", 5),
+                new Card("6", 6),
+                new Card("7", 7),
+                new Card("8", 8),
+                new Card("9", 9)
+            };
+
+            var rnd = new Random();
+            const int maxNrOfTasks = 100;
+            var tasks = new Task[maxNrOfTasks];
+            var cardDeck = new CardDeck();
+            var maxNrOfCards = cardDeck.Cards.Length;
+
+            const int maxNrOfRuns = 100;
+            for (int runs = 0; runs < maxNrOfRuns; runs++)
+            {
+                // Act
+                for (int i = 0; i < tasks.Length; i++)
+                {
+                    tasks[i] = Task.Run(() =>
+                    {
+                        var maxShuffleTimes = rnd.Next(26, 100);
+                        for (int index = 0; index < maxShuffleTimes; index++)
+                        {
+                            var firstCardIndex = rnd.Next(maxNrOfCards);
+                            var secondCardIndex = rnd.Next(maxNrOfCards);
+                            cardDeck.SwapCards(firstCardIndex, secondCardIndex);
+                        }
+                    });
+                }
+
+                await Task.WhenAll(tasks).ConfigureAwait(false);
+
+                // Assert
+                foreach (var card in defaultSuitOfCards)
+                {
+                    var actualNrOfSuits = cardDeck.Cards.Count(c => c.Name == card.Name && c.Value == card.Value);
+                    if (actualNrOfSuits != expectedNrOfSuits)
+                    {
+                        var message = $"Card '{card}' expected {expectedNrOfSuits} times, and found {actualNrOfSuits} times.";
+                        Assert.Empty(message);
+                    }
+                }
+            }
         }
     }
 }

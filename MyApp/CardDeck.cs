@@ -6,6 +6,7 @@ namespace MyApp
 {
     public sealed class CardDeck
     {
+        private readonly object _lockObj = new();
         private readonly List<Card> _cards;
 
         public CardDeck()
@@ -39,32 +40,38 @@ namespace MyApp
 
         public Card TakeCard()
         {
-            if (IsDeckEmpty)
-                throw new ApplicationException("The deck is empty.");
+            lock (_lockObj)
+            {
+                if (IsDeckEmpty)
+                    throw new ApplicationException("The deck is empty.");
 
-            const int index = 0;
-            var card = _cards[index];
-            _cards.RemoveAt(index);
-            return card;
+                const int index = 0;
+                var card = _cards[index];
+                _cards.RemoveAt(index);
+                return card;
+            }
         }
 
         public void SwapCards(int firstCardIndex, int secondCardIndex)
         {
-            const int minIndex = 0;
-            var maxIndex = _cards.Count;
-
-            if (firstCardIndex < minIndex || firstCardIndex > maxIndex ||
-                secondCardIndex < minIndex || secondCardIndex > maxIndex)
+            lock (_lockObj)
             {
-                throw new IndexOutOfRangeException();
+                const int minIndex = 0;
+                var maxIndex = _cards.Count;
+
+                if (firstCardIndex < minIndex || firstCardIndex > maxIndex ||
+                    secondCardIndex < minIndex || secondCardIndex > maxIndex)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+
+                if (firstCardIndex == secondCardIndex)
+                    return;
+
+                var item = _cards[firstCardIndex];
+                _cards[firstCardIndex] = _cards[secondCardIndex];
+                _cards[secondCardIndex] = item;
             }
-
-            if (firstCardIndex == secondCardIndex)
-                return;
-
-            var item = _cards[firstCardIndex];
-            _cards[firstCardIndex] = _cards[secondCardIndex];
-            _cards[secondCardIndex] = item;
         }
     }
 }
