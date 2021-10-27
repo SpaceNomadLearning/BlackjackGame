@@ -19,6 +19,7 @@ namespace MyApp.Tests
         public void CardDeck_Should_Contain_4_Suits_With_13_Cards_Each()
         {
             // Arrange
+            const int expectedNrOfSuits = 4;
             var defaultSuitOfCards = new[]
             {
                 new Card("A", 11),
@@ -44,8 +45,8 @@ namespace MyApp.Tests
             // Assert
             foreach (var card in defaultSuitOfCards)
             {
-                var nrOfSuits = cardDeck.Cards.Count(c => c.Name == card.Name && c.Value == card.Value);
-                Assert.Equal(4, nrOfSuits);
+                var actualNrOfSuits = cardDeck.Cards.Count(c => c == card);
+                Assert.Equal(expectedNrOfSuits, actualNrOfSuits);
             }
         }
 
@@ -172,7 +173,7 @@ namespace MyApp.Tests
                 // Assert
                 foreach (var card in defaultSuitOfCards)
                 {
-                    var actualNrOfSuits = cardDeck.Cards.Count(c => c.Name == card.Name && c.Value == card.Value);
+                    var actualNrOfSuits = cardDeck.Cards.Count(c => c == card);
                     if (actualNrOfSuits != expectedNrOfSuits)
                     {
                         var message = $"Card '{card}' expected {expectedNrOfSuits} times, and found {actualNrOfSuits} times.";
