@@ -49,7 +49,7 @@ namespace MyApp.Tests
         }
 
         [Fact]
-        public void CardDeck_Should_Throw_Exception_For_Empty_Deck()
+        public void CardDeck_TakeCard_Should_Throw_Exception_For_Empty_Deck()
         {
             // Arrange
             const string expectedErrorMessage = "The deck is empty.";
