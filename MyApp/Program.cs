@@ -6,20 +6,20 @@ namespace MyApp
     {
         private static void Main()
         {
+            var writer = Console.Out;
             try
             {
                 var game = PlayNewGame();
-                game.WriteResultTo(Console.Out);
+                game.WriteResultTo(writer);
             }
             catch (Exception e)
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine();
-                Console.WriteLine($"Program crashed with next message '{e.Message}'.");
+                writer.WriteLine();
+                writer.WriteErrorText($"Program crashed with next message '{e.Message}'.");
             }
             finally
             {
-                Console.ResetColor();
+                writer.ResetColor();
             }
         }
 
