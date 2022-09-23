@@ -2,7 +2,7 @@ using System;
 using System.CodeDom.Compiler;
 using System.IO;
 
-namespace MyApp
+namespace MyApp.IO
 {
     internal static class TextWriterExtensions
     {
