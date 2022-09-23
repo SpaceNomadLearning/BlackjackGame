@@ -70,20 +70,20 @@ namespace MyApp
             var allPlayers = new List<Player> { _dealer };
             allPlayers.AddRange(Players);
 
-            writer.Write("Player".PadRight(10));
-            writer.Write("| Aversion".PadRight(11));
-            writer.Write("| Points".PadRight(10));
-            writer.Write("| Hand");
+            writer.WriteText("Player".PadRight(10));
+            writer.WriteText("| Aversion".PadRight(11));
+            writer.WriteText("| Points".PadRight(10));
+            writer.WriteText("| Hand");
             writer.WriteLine();
             foreach (var player in allPlayers)
             {
-                writer.Write(player.Name.PadRight(10));
-                writer.Write($"| {player.RiskAversion}".PadRight(11));
-                writer.Write($"| {player.CardsValue}".PadRight(10));
+                writer.WriteText(player.Name.PadRight(10));
+                writer.WriteText($"| {player.RiskAversion}".PadRight(11));
+                writer.WriteText($"| {player.CardsValue}".PadRight(10));
 
-                writer.Write("| ");
+                writer.WriteText("| ");
                 foreach (var card in player.Cards)
-                    writer.Write($"{card}".PadRight(4));
+                    writer.WriteText($"{card}".PadRight(4));
 
                 writer.WriteLine();
             }
@@ -95,7 +95,10 @@ namespace MyApp
             if (instantWinners.Any())
             {
                 var winners = string.Join(", ", instantWinners.Select(p => p.Name));
-                writer.WriteLine($"Instant-Win: {winners}");
+                writer.WriteWarningText("Instant-Win: ");
+                writer.WriteSuccessText(winners);
+                writer.WriteLine();
+                writer.ResetColor();
             }
             else
             {
@@ -111,7 +114,9 @@ namespace MyApp
                 if (_dealer.CardsValue > (endGameWinner?.CardsValue ?? 0))
                     endGameWinner = _dealer;
 
-                writer.WriteLine($"End-game-Win: {endGameWinner.Name}");
+                writer.WriteWarningText("End-game-Win: ");
+                writer.WriteSuccessText(endGameWinner.Name);
+                writer.ResetColor();
             }
         }
 
