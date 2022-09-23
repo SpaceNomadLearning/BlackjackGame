@@ -90,11 +90,11 @@ namespace MyApp
 
             // Instant-Win conditions:
             //     - "blackjack" hand - A player's first two cards are an ACE and a car with a 10 value.
-            //     - A player reaches exactely 21
-            var instantWiners = allPlayers.Where(p => p.CardsValue == 21);
-            if (instantWiners.Any())
+            //     - A player reaches exactly 21
+            var instantWinners = allPlayers.Where(p => p.CardsValue == 21);
+            if (instantWinners.Any())
             {
-                var winners = string.Join(", ", instantWiners.Select(p => p.Name));
+                var winners = string.Join(", ", instantWinners.Select(p => p.Name));
                 writer.WriteLine($"Instant-Win: {winners}");
             }
             else
@@ -119,7 +119,7 @@ namespace MyApp
         {
             // Instant-Win conditions:
             //     - "blackjack" hand - A player's first two cards are an ACE and a car with a 10 value.
-            //     - A player reaches exactely 21
+            //     - A player reaches exactly 21
             return players.Any(p => p.CardsValue == 21);
         }
 
